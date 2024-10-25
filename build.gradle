@@ -1,40 +1,67 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.3.4'
-    id 'io.spring.dependency-management' version '1.1.6'
+plugins { // 기초적인 플랫폼 사용 명시
+    id 'java' // Java 애플리케이션을 빌드하기 위한 플러그인 : Java 컴파일 기능 & 기본 태스크 등 제공
+    id 'org.springframework.boot' version '3.3.4' // 실행 가능한 JAR 파일을 생성, Spring Boot의 의존성 관리, 애플리케이션의 자동 구성을 제공
+    id 'io.spring.dependency-management' version '1.1.6' // 의존성을 관리해주는 모듈 : 별도로 버전을 명시하지 않아도 Spring Boot가 권장하는 버전의 의존성을 사용하도록 도움
 }
 
-group = 'org.example'
-version = '0.0.1-SNAPSHOT'
+group = 'org.example' // 프로젝트의 그룹 ID : 일반적으로 도메인 이름을 역순으로 사용
+version = '0.0.1-SNAPSHOT' // 현재 프로젝트 버전 ( -SNAPSHOT : 개발 중인 버전)
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(17) // 사용할 Java 버전 : 이 프로젝트는 Java17 사용
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+configurations { // Gradle에서 의존성을 관리하는 다양한 구성 요소를 정의하는 블록
+    compileOnly { // 컴파일 시에만 필요한 의존성을 정의
+        extendsFrom annotationProcessor // compileOnly 구성에서 annotationProcessor를 확장 : lombok 같은 라이브러리에서 annotation을 처리하기 위해 필요
     }
 }
 
 repositories {
-    mavenCentral()
+    /*
+       [Gradle Build]
+            - mavenCentral() : Maven Central
+            - jcenter() : Bintray JCenter
+            - google() : Google Android
+     */
+    mavenCentral() // Maven Central 저장소에서 의존성을 가져오도록 설정
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+dependencies { // 프로젝트에서 사용하는 라이브러리 & 의존성을 정의하는 블록
+    /*
+    - implementation : 구현할 때만 사용한다.
+                       A모듈이 변경되었을 경우 재빌드 시 직접적으로 의존하고 있는 B모듈 까지만 재빌드 한다.
+                       지정한 모듈까지만 빌드되어 포함되기 때문에 compile보다 빠르다.
+    - compileOnly : 컴파일 시에만 빌드하고 빌드 결과물에는 포함되지 않는다.
+    - developmentOnly : 개발 환경에서만 필요한 라이브러리에 사용, 배포할 때는 포함되지 않음
+    - runtimeOnly : 런타임 시에만 필요한 라이브러리인 경우 사용
+    - annotationProcessor : 어노테이션을 사용하는 라이브러리인 경우 명시
+    - testImplementation : 테스트할 때에만 필요한 라이브러리를 명시
+    - testRuntimeOnly : 테스트 실행 환경에서만 필요한 라이브러리, 테스트 컴파일 시에는 필요하지 않음
+     */
+    implementation 'org.springframework.boot:spring-boot-starter-actuator' // Spring Boot 애플리케이션의 운영 및 모니터링을 위한 기능을 제공하는 스타터
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA를 사용해 DB와 상호작용할 수 있도록 하는 스타터
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Boot 개발에 필요한 기본 구성요소를 포함 (Spring MVC, RESTful API, 내장 Tomcat 서버 등)
+    compileOnly 'org.projectlombok:lombok' // lombok 라이브러리를 사용해 반복적인 코드(Getter, Setter 등)를 자동으로 생성할 수 있도록 해줌
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // 개발에 유용한 도구 모음(자동 재시작, 라이브 리로드 등) 제공
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB와 연결하기 위한 JDBC 드라이버
+    annotationProcessor 'org.projectlombok:lombok' // lombok의 annotation 프로세서를 사용해 컴파일 시점에 코드 생성 기능을 활성화
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트를 위한 라이브러리를 포함 (JUnit, Spring Test, MockMVC 등)
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 플랫폼에서 테스트를 실행하기 위한 런타임 의존성
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+    /*
+        ['test'라는 이름의 테스트 작업을 찾는다]
+        - task : gradle의 작업을 정의하는 객체
+        - named('test') : test라는 이름을 가진 작업을 찾아서 그 작업을 구성할 수 있도록 한다.
+     */
+    useJUnitPlatform() // test 작업에 대한 설정을 정의 : JUnit5 플랫폼을 사용하여 테스트를 실행하도록 Gradle에 지시한다.
+
+    /*
+        - Spring Boot 프로젝트에서는 JUnit5가 기본적으로 사용된다.
+        - spring-boot-start-test 의존성을 추가하면 JUnit5와 관련된 라이브러리가 자동으로 포함되기 때문
+     */
 }
