@@ -43,7 +43,9 @@ dependencies { // 프로젝트에서 사용하는 라이브러리 & 의존성을
      */
     implementation 'org.springframework.boot:spring-boot-starter-actuator' // Spring Boot 애플리케이션의 운영 및 모니터링을 위한 기능을 제공하는 스타터
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA를 사용해 DB와 상호작용할 수 있도록 하는 스타터
-    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Boot 개발에 필요한 기본 구성요소를 포함 (Spring MVC, RESTful API, 내장 Tomcat 서버 등)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // thymeleaf 의존성 추가 (templates 엔진을 추가해야 resources > templates > 하위에 html 파일 사용 가능 
+// Spring Boot 개발에 필요한 기본 구성요소를 포함 (Spring MVC, RESTful API, 내장 Tomcat 서버 등)
     compileOnly 'org.projectlombok:lombok' // lombok 라이브러리를 사용해 반복적인 코드(Getter, Setter 등)를 자동으로 생성할 수 있도록 해줌
     developmentOnly 'org.springframework.boot:spring-boot-devtools' // 개발에 유용한 도구 모음(자동 재시작, 라이브 리로드 등) 제공
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB와 연결하기 위한 JDBC 드라이버
