@@ -1,13 +1,18 @@
 package org.example.mygradle01.controller;
 
-import org.springframework.stereotype.Controller;
+import org.example.mygradle01.service.HomeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class HomeController {
-		@GetMapping("/")
-		public String index() {
-			return "index";
-		}
+	@Autowired
+    private HomeService homeService;
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 }
 
