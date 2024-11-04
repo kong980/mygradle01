@@ -52,6 +52,7 @@ dependencies { // 프로젝트에서 사용하는 라이브러리 & 의존성을
     annotationProcessor 'org.projectlombok:lombok' // lombok의 annotation 프로세서를 사용해 컴파일 시점에 코드 생성 기능을 활성화
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트를 위한 라이브러리를 포함 (JUnit, Spring Test, MockMVC 등)
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 플랫폼에서 테스트를 실행하기 위한 런타임 의존성
+    implementation 'org.json:json:20210307'
 }
 
 tasks.named('test') {
