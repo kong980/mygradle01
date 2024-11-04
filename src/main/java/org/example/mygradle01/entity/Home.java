@@ -21,9 +21,6 @@ public class Home {
     private String item;
 
     @Column(nullable = false)
-    private String newItem;
-
-    @Column(nullable = false)
     private Timestamp createDate;
 
     @Column(nullable = true, insertable = false)

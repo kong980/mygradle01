@@ -14,7 +14,6 @@ import java.sql.Timestamp;
 public class HomeDto {
     private Integer id;
     private String item;
-    private String newItem;
     private Timestamp createDate;
     private Timestamp updateDate;
     private String deleted;
