@@ -7,12 +7,28 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>할 일 목록</h1>
-    <input type="text" id="itemInput" placeholder="새 항목을 입력하세요">
-    <button id="addButton">추가</button>
+<h1>할 일 목록</h1>
+<br>
+<input type="text" id="itemInput" placeholder="새 항목을 입력하세요">
+<button id="addButton">추가</button>
 
+<input type="text" id="itemSearch" placeholder="검색할 항목을 입력하세요">
+<button id="searchButton">검색</button>
+
+<form style="display: inline-block">
+    <label for="proc">진행 상태</label>
+    <select name="process" id="proc">
+        <option value="ing">진행중</option>
+        <option value="success">완료</option>
+        <option value="fail">미완료</option>
+    </select>
+    <input type="button" id="processSearch" value="검색"/>
+</form>
+
+<div id="lists">
     <ul id="itemList"></ul>
+</div>
 
-    <script src="/js/index.js"></script>
+<script src="/js/index.js"></script>
 </body>
 </html>

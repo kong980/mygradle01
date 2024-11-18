@@ -23,9 +23,12 @@ public class Home {
     @Column(nullable = false)
     private Timestamp createDate;
 
-    @Column(nullable = true, insertable = false)
+    @Column(insertable = false)
     private Timestamp updateDate;
 
     @Column(nullable = false)
     private String deleted;
+
+    @Column(nullable = false)
+    private String process;
 }

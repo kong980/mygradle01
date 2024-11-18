@@ -17,5 +17,6 @@ public class HomeDto {
     private Timestamp createDate;
     private Timestamp updateDate;
     private String deleted;
+    private String process;
 
 }
